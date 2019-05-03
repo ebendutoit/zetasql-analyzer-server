@@ -8,11 +8,15 @@ zetaSQL analyzer
 # zetasql-format-server
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 It is GoogleSQL dialect format server using ZetaSQL. It runs on Cloud Run(and Knative Serving).
 >>>>>>> Add description to README.md
 =======
 It is GoogleSQL dialect format server using [ZetaSQL](https://github.com/google/zetasql). It runs on Cloud Run(and Knative Serving).
 >>>>>>> Fix reference
+=======
+It is GoogleSQL(BigQuery, Cloud SQL) dialect format server using [ZetaSQL](https://github.com/google/zetasql). It runs on Cloud Run(and Knative Serving).
+>>>>>>> Add desc of GoogleSQL
 
 [![Run on Google Cloud](https://storage.googleapis.com/cloudrun/button.png)](https://console.cloud.google.com/cloudshell/editor?shellonly=true&cloudshell_image=gcr.io/cloudrun/button&cloudshell_git_repo=https://github.com/apstndb/zetasql-format-server.git)
 
