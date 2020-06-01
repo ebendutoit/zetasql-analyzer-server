@@ -38,9 +38,9 @@ RUN apt-get update \
     && apt-get autoremove -y \
     && apt-get clean -y 
 
-COPY CROSSTOOL WORKSPACE BUILD parser.cc parser.h main.go /work/
 RUN git clone https://github.com/google/zetasql.git /work/ \
-  && cd /work/ \
+COPY CROSSTOOL WORKSPACE BUILD parser.cc parser.h main.go /work/
+RUN cd /work/ \
   && rm .bazelversion \
   && bazel build ...
 
