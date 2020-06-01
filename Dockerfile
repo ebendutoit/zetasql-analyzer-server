@@ -38,10 +38,11 @@ RUN apt-get update \
     && apt-get autoremove -y \
     && apt-get clean -y 
 
-RUN git clone https://github.com/google/zetasql.git /work/
+RUN git clone https://github.com/google/zetasql.git /work/zetasql
 COPY CROSSTOOL WORKSPACE BUILD parser.cc parser.h main.go /work/ 
 RUN cd /work/zetasql \
-  && bazel build ...
+  && rm .bazelversion 
+  #&& bazel build ...
 
 RUN cd /work \
 && bazel build ...
