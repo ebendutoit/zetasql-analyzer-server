@@ -39,8 +39,8 @@ RUN apt-get update \
     && apt-get clean -y 
 
 COPY CROSSTOOL WORKSPACE BUILD parser.cc parser.h main.go /work/
-RUN git clone https://github.com/google/zetasql.git /work/zetasql \
-  && cd /work/zetasql \
+RUN git clone https://github.com/google/zetasql.git /work/ \
+  && cd /work/ \
   && rm .bazelversion \
   && bazel build ...
 
