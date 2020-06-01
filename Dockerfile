@@ -8,6 +8,9 @@ ARG USERNAME=vscode
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
+ENV CC /usr/bin/gcc
+WORKDIR /work
+
 # Configure apt and install packages
 RUN apt-get update \
     && apt-get -y install --no-install-recommends apt-utils dialog 2>&1 \
@@ -35,8 +38,6 @@ RUN apt-get update \
     && apt-get autoremove -y \
     && apt-get clean -y 
 
-ENV CC /usr/bin/gcc
-WORKDIR /work
 COPY CROSSTOOL WORKSPACE BUILD parser.cc parser.h main.go /work/
 RUN git clone https://github.com/google/zetasql.git /zetasql \
   && cd /zetasql \
