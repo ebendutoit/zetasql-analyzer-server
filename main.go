@@ -2,7 +2,7 @@ package main
 
 /*
 #include <stdlib.h>
-#include "formatsql.h"
+#include "parser.h"
 */
 import "C"
 import (
@@ -24,10 +24,10 @@ func handler(w http.ResponseWriter, r *http.Request) {
     cs := C.CString(string(b))
     defer C.free(unsafe.Pointer(cs))
 
-    formatResult := C.formatSqlC(cs)
-    defer C.free(unsafe.Pointer(formatResult))
+    parseResult := C.parseQuery(cs)
+    defer C.free(unsafe.Pointer(parseResult))
 
-    w.Write([]byte(C.GoString(formatResult)))
+    w.Write([]byte(C.GoString(parseResult)))
 }
 
 func main() {

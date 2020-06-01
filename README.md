@@ -1,11 +1,15 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 # zetasql-analyzer-server
 zetaSQL analyzer
 =======
 # GoogleSQL dialect format server using ZetaSQL
 =======
 # zetasql-format-server
+=======
+# zetasql-analyzer-server
+>>>>>>> First pass
 
 <<<<<<< HEAD
 <<<<<<< HEAD
