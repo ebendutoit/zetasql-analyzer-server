@@ -39,12 +39,10 @@ RUN apt-get update \
     && apt-get clean -y 
 
 COPY CROSSTOOL WORKSPACE BUILD parser.cc parser.h main.go /work/
-COPY bazel/* /work/bazel/
-RUN bazel build ...
-# RUN git clone https://github.com/google/zetasql.git /zetasql \
-#   && cd /zetasql \
-#   && rm .bazelversion \
-#   && bazel build ...
+RUN git clone https://github.com/google/zetasql.git /work/zetasql \
+  && cd /work/zetasql \
+  && rm .bazelversion \
+  && bazel build ...
 
 FROM gcr.io/distroless/cc
 COPY --from=build-env /work/bazel-bin/linux_amd64_stripped/zetasql-server ./
