@@ -46,7 +46,7 @@ RUN cd /work/ \
 
 # Abseil
 
-RUN cd /tmp && git clone https://github.com/abseil/abseil-cpp.git abseil && ls -la
+RUN cd /tmp && git clone https://github.com/abseil/abseil-cpp.git abseil && ls -la && ls abseil/
 COPY abseil /work/
 
 
