@@ -66,9 +66,9 @@ RUN cd /tmp \
 # Build the protobuf for zetaSQL
 RUN cd /work/zetasql/proto \
   && protoc -I=options.proto --cpp_out=. \
-  && protoc -I=internal_error_location.proto --cpp_out=. \
-  && protoc -I=function.proto --cpp_out=. \
-  && protoc -I=simple_catalog.proto --cpp_out=.
+  #&& protoc -I=internal_error_location.proto --cpp_out=. \
+  #&& protoc -I=function.proto --cpp_out=. \
+  #&& protoc -I=simple_catalog.proto --cpp_out=.
 
 
 # Install GO
