@@ -50,9 +50,22 @@ RUN cd /tmp && git clone https://github.com/abseil/abseil-cpp.git abseil && cp -
 # Protobuf
 RUN cd /tmp \
   && git clone https://github.com/protocolbuffers/protobuf protobuf \
+  && cd /tmp/protobuf \
+  && ./configure \
+  && make \
+  && make check \
+  && sudo make install \
+  && sudo ldconfig \
   && mkdir /work/google \
   && cp -R protobuf/src/google /work/ \
   && ls /work/google
+
+# Build the protobuf for zetaSQL
+RUN protoc /work/zetasql/proto/options.proto --cpp_out=. \
+  && protoc /work/zetasql/proto/internal_error_location.proto --cpp_out=. \
+  && protoc /work/zetasql/proto/function.proto --cpp_out=. \
+  && protoc /work/zetasql/proto/simple_catalog.proto --cpp_out=.
+
 
 # Install GO
 RUN cd /tmp \
