@@ -51,10 +51,10 @@ RUN cd /tmp && git clone https://github.com/abseil/abseil-cpp.git abseil && cp -
 RUN cd /tmp \
   && git clone https://github.com/protocolbuffers/protobuf protobuf \
   && cd /tmp/protobuf \
-  && ./configure \
-  && make \
-  && make check \
-  && sudo make install \
+  && ./tmp/protobuf/configure \
+  && ./tmp/protobuf/make \
+  && ./tmp/protobuf/make check \
+  && sudo ./tmp/protobuf/make install \
   && sudo ldconfig \
   && mkdir /work/google \
   && cp -R protobuf/src/google /work/ \
