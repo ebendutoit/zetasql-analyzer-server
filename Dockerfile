@@ -51,7 +51,7 @@ RUN cd /tmp && git clone https://github.com/abseil/abseil-cpp.git abseil && cp -
 RUN cd /tmp \
   # && git clone https://github.com/protocolbuffers/protobuf protobuf \
   && wget https://github.com/protocolbuffers/protobuf/releases/download/v3.6.1/protobuf-all-3.6.1.tar.gz \
-  && sudo tar -xvf protoc-3.6.1-linux-x86_64.zip \
+  && sudo tar -xvf protobuf-all-3.6.1.tar.gz \
   && cd /tmp/protobuf-3.6.1 \
   && ls -la \
   && sudo .configure \
