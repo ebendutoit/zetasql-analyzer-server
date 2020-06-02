@@ -52,7 +52,7 @@ RUN cd /tmp \
   && echo "export GOROOT=/usr/local/go" >> ~/.profile  \
   && echo "export GOPATH=$HOME/go" >> ~/.profile \
   && echo "export PATH=$GOPATH/bin:$GOROOT/bin:$PATH" >> ~/.profile \
-  && source ~/.profile \
+  && . ~/.profile \
   && go version \
   && echo $GOPATH \
 
