@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string.h>
 
-#include "zetasql/zetasql/public/analyzer.h"
+#include "zetasql/public/analyzer.h"
 #include "parser.h"
 
 char *parseQuery(char* sql) {

@@ -38,7 +38,7 @@ RUN apt-get update \
     && apt-get autoremove -y \
     && apt-get clean -y 
 
-RUN git clone https://github.com/google/zetasql.git /work/zetasql
+RUN git clone https://github.com/google/zetasql.git /work/
 COPY CROSSTOOL parser.cc parser.h main.go /work/ 
 RUN cd /work/zetasql \
   && rm .bazelversion \
