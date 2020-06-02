@@ -58,7 +58,7 @@ RUN cd /tmp \
   && which go \
   && echo $GOPATH \
   && cd /work \
-  && sudo /tmp/go build -o main .
+  && sudo /usr/local/go/bin/go build -o main .
 
 # FROM gcr.io/distroless/cc
 # COPY --from=build-env /work/bazel-bin/linux_amd64_stripped/zetasql-server ./
