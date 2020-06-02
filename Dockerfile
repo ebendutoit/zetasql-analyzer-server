@@ -38,15 +38,6 @@ RUN apt-get update \
     && apt-get autoremove -y \
     && apt-get clean -y 
 
-RUN git clone https://github.com/google/zetasql.git /work/
-COPY CROSSTOOL parser.cc parser.h main.go /work/ 
-RUN cd /work/ \
-  && rm .bazelversion \
-  && bazel build ...
-
-# Abseil
-RUN cd /tmp && git clone https://github.com/abseil/abseil-cpp.git abseil && cp -R abseil/absl /work/
-
 # Protobuf
 RUN cd /tmp \
   # && git clone https://github.com/protocolbuffers/protobuf protobuf \
@@ -63,15 +54,14 @@ RUN cd /tmp \
   && cp -R src/google /work/ \
   && ls /work/google
 
-# Build the protobuf for zetaSQL
-RUN cd /work/zetasql/proto \
-  && ls -l \
-  && protoc -I=/work/ --cpp_out=/work/zetasql/proto/ /work/zetasql/proto/options.proto
-  #&& protoc --cpp_out=/work/zetasql/proto/options.proto 
-  #&& protoc -I=internal_error_location.proto --cpp_out=. \
-  #&& protoc -I=function.proto --cpp_out=. \
-  #&& protoc -I=simple_catalog.proto --cpp_out=.
+RUN git clone https://github.com/google/zetasql.git /work/
+COPY CROSSTOOL parser.cc parser.h main.go /work/ 
+RUN cd /work/ \
+  && rm .bazelversion \
+  && bazel build ...
 
+# Abseil
+RUN cd /tmp && git clone https://github.com/abseil/abseil-cpp.git abseil && cp -R abseil/absl /work/
 
 # Install GO
 RUN cd /tmp \
