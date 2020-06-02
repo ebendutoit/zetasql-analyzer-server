@@ -66,7 +66,7 @@ RUN cd /tmp \
 # Build the protobuf for zetaSQL
 RUN cd /work/zetasql/proto \
   && ls -l \
-  && protoc -I=/work/zetasql/public/builtin_function.proto -I=/work/zetasql/public/options.proto -I=/work/zetasql/public/type.proto -I=/work/zetasql/resolved_ast/resolved_node_kind.proto.template --cpp_out=. /work/zetasql/proto/options.proto
+  && protoc -I=/work/zetasql/public/builtin_function.proto -I=/work/zetasql/public/options.proto -I=/work/zetasql/public/type.proto -I=/work/zetasql/resolved_ast/resolved_node_kind.proto.template --cpp_out=.
   #&& protoc --cpp_out=/work/zetasql/proto/options.proto 
   #&& protoc -I=internal_error_location.proto --cpp_out=. \
   #&& protoc -I=function.proto --cpp_out=. \
