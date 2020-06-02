@@ -45,10 +45,14 @@ RUN cd /work/ \
   && bazel build ...
 
 # Abseil
-RUN cd /tmp && git clone https://github.com/abseil/abseil-cpp.git abseil && ls -la && ls abseil/ && cp -R abseil/absl /work/
+RUN cd /tmp && git clone https://github.com/abseil/abseil-cpp.git abseil && cp -R abseil/absl /work/
 
 # Protobuf
-RUN cd /tmp && git clone https://github.com/protocolbuffers/protobuf protobuf && mkdir /work/google && cp -R protobuf/src/ /work/ && ls /work/google
+RUN cd /tmp \
+  && git clone https://github.com/protocolbuffers/protobuf protobuf \
+  && mkdir /work/google \
+  && cp -R protobuf/src/google /work/ \
+  && ls /work/google
 
 # Install GO
 RUN cd /tmp \
