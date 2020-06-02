@@ -54,6 +54,7 @@ RUN cd /tmp \
   && export PATH=$GOPATH/bin:$GOROOT/bin:$PATH \
   && go version \
   && echo $GOPATH
+  && ls /usr/local/go
 
 RUN cd /work \
   && sudo /root/go build -o main .
