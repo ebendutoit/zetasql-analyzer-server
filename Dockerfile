@@ -54,7 +54,7 @@ RUN cd /tmp \
   && sudo tar -xvf protobuf-all-3.6.1.tar.gz \
   && cd /tmp/protobuf-3.6.1 \
   && ls -la \
-  && sudo .configure \
+  && sudo ./configure \
   && sudo make \
   && sudo make check \
   && sudo make install \
