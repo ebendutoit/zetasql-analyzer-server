@@ -55,9 +55,9 @@ RUN cd /tmp \
   && ls ~/ \
   # && . ~/.profile \
   && go version \
+  && which go \
   && echo $GOPATH \
-
-RUN cd /work \
+  && cd /work \
   && sudo /tmp/go build -o main .
 
 # FROM gcr.io/distroless/cc
