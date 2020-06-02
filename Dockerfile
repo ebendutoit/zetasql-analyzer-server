@@ -47,7 +47,7 @@ RUN cd /work/ \
 # Abseil
 
 RUN cd /tmp && git clone https://github.com/abseil/abseil-cpp.git abseil && ls -la
-COPY /tmp/abseil/ /work/
+COPY abseil /work/
 
 
 # Install GO
