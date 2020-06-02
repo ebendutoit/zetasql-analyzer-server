@@ -49,12 +49,12 @@ RUN cd /tmp \
   && wget https://dl.google.com/go/go1.11.linux-amd64.tar.gz \
   && sudo tar -xvf go1.11.linux-amd64.tar.gz \
   && sudo mv go /usr/local \
-  && export GOROOT=/usr/local/go \
-  && export GOPATH=$HOME/go \
-  && export PATH=$GOPATH/bin:$GOROOT/bin:$PATH \
+  && echo "export GOROOT=/usr/local/go" >> ~/.profile  \
+  && echo "export GOPATH=$HOME/go" >> ~/.profile \
+  && echo "export PATH=$GOPATH/bin:$GOROOT/bin:$PATH" >> ~/.profile \
+  && source ~/.profile \
   && go version \
   && echo $GOPATH \
-  && ls /usr/local/go
 
 RUN cd /work \
   && sudo /root/go build -o main .
