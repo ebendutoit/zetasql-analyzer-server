@@ -53,6 +53,7 @@ RUN cd /tmp \
   && export GOPATH=$HOME/go \
   && export PATH=$GOPATH/bin:$GOROOT/bin:$PATH \
   && go version
+  && echo $GOPATH
 
 RUN cd /work \
   && sudo /usr/local/go build -o main .
