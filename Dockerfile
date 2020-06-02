@@ -53,7 +53,7 @@ RUN cd /tmp \
   && export GOPATH=$HOME/go \
   && export PATH=$GOPATH/bin:$GOROOT/bin:$PATH \
   && go version \
-  && echo $GOPATH
+  && echo $GOPATH \
   && ls /usr/local/go
 
 RUN cd /work \
