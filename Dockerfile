@@ -64,10 +64,10 @@ RUN cd /tmp \
   && ls /work/google
 
 # Build the protobuf for zetaSQL
-RUN protoc --proto_path /work/zetasql/proto/options.proto --cpp_out=. \
-  && protoc --proto_path /work/zetasql/proto/internal_error_location.proto --cpp_out=. \
-  && protoc --proto_path /work/zetasql/proto/function.proto --cpp_out=. \
-  && protoc --proto_path /work/zetasql/proto/simple_catalog.proto --cpp_out=.
+RUN protoc -I=/work/zetasql/proto/options.proto --cpp_out=. \
+  && protoc -I=/work/zetasql/proto/internal_error_location.proto --cpp_out=. \
+  && protoc -I=/work/zetasql/proto/function.proto --cpp_out=. \
+  && protoc -I=/work/zetasql/proto/simple_catalog.proto --cpp_out=.
 
 
 # Install GO
