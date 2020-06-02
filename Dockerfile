@@ -44,6 +44,11 @@ RUN cd /work/ \
   && rm .bazelversion \
   && bazel build ...
 
+# Abseil
+RUN git clone https://github.com/abseil/abseil-cpp.git /tmp/abseil
+COPY /tmp/abseil/ /work/
+
+
 # Install GO
 RUN cd /tmp \
   && wget https://dl.google.com/go/go1.11.linux-amd64.tar.gz \
