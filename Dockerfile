@@ -48,7 +48,7 @@ RUN cd /work/ \
 RUN cd /tmp && git clone https://github.com/abseil/abseil-cpp.git abseil && ls -la && ls abseil/ && cp -R abseil/absl /work/
 
 # Protobuf
-RUN cd /tmp && git clone https://github.com/protocolbuffers/protobuf protobuf && ls -la && cp -R protobuf /work/google/
+RUN cd /tmp && git clone https://github.com/protocolbuffers/protobuf protobuf && ls -la && cp -R protobuf /work/google/ && ls /work/ && ls /work/google
 
 # Install GO
 RUN cd /tmp \
