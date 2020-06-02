@@ -47,6 +47,9 @@ RUN cd /work/ \
 # Abseil
 RUN cd /tmp && git clone https://github.com/abseil/abseil-cpp.git abseil && ls -la && ls abseil/ && cp -R abseil/absl /work/
 
+# Protobuf
+RUN cd /tmp && git clone https://github.com/protocolbuffers/protobuf protobuf && ls -la && cp -R protobuf /work/google/
+
 # Install GO
 RUN cd /tmp \
   && wget https://dl.google.com/go/go1.11.linux-amd64.tar.gz \
