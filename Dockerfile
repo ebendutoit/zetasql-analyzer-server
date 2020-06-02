@@ -49,16 +49,18 @@ RUN cd /tmp && git clone https://github.com/abseil/abseil-cpp.git abseil && cp -
 
 # Protobuf
 RUN cd /tmp \
-  && git clone https://github.com/protocolbuffers/protobuf protobuf \
-  && cd /tmp/protobuf \
+  # && git clone https://github.com/protocolbuffers/protobuf protobuf \
+  && wget https://github.com/protocolbuffers/protobuf/releases/download/v3.6.1/protobuf-all-3.6.1.tar.gz \
+  && sudo tar -xvf protoc-3.6.1-linux-x86_64.zip \
+  && cd /tmp/protobuf-3.6.1 \
   && ls -la \
-  && ./tmp/protobuf/configure \
-  && ./tmp/protobuf/make \
-  && ./tmp/protobuf/make check \
-  && sudo ./tmp/protobuf/make install \
+  && sudo .configure \
+  && sudo make \
+  && sudo make check \
+  && sudo make install \
   && sudo ldconfig \
   && mkdir /work/google \
-  && cp -R protobuf/src/google /work/ \
+  && cp -R src/google /work/ \
   && ls /work/google
 
 # Build the protobuf for zetaSQL
