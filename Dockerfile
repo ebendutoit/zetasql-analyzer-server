@@ -66,7 +66,7 @@ RUN cd /tmp \
 # Build the protobuf for zetaSQL
 RUN cd /work/zetasql/proto \
   && ls -l \
-  && protoc --cpp_out=./options.proto 
+  && protoc --cpp_out=/work/zetasql/proto/options.proto 
   #&& protoc -I=internal_error_location.proto --cpp_out=. \
   #&& protoc -I=function.proto --cpp_out=. \
   #&& protoc -I=simple_catalog.proto --cpp_out=.
