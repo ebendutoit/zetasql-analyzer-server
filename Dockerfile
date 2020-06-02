@@ -45,8 +45,8 @@ RUN cd /work/zetasql \
   && bazel build ...
 
 RUN cd /work \
-&& bazel build ...
+  && go build -o main .
 
-FROM gcr.io/distroless/cc
-COPY --from=build-env /work/bazel-bin/linux_amd64_stripped/zetasql-server ./
-ENTRYPOINT ["./zetasql-server"]
+# FROM gcr.io/distroless/cc
+# COPY --from=build-env /work/bazel-bin/linux_amd64_stripped/zetasql-server ./
+ENTRYPOINT ["./main"]
