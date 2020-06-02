@@ -50,8 +50,8 @@ RUN cd /tmp \
   && sudo tar -xvf go1.11.linux-amd64.tar.gz \
   && sudo mv go /usr/local \
   && export GOROOT=/usr/local/go \
-  && export GOPATH=$HOME/go
-  && export PATH=$GOPATH/bin:$GOROOT/bin:$PATH
+  && export GOPATH=$HOME/go \
+  && export PATH=$GOPATH/bin:$GOROOT/bin:$PATH \
   && go version
 
 RUN cd /work \
