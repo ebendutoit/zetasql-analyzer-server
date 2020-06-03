@@ -1,24 +1,25 @@
-FROM ubuntu:18.04
-ENV DEBIAN_FRONTEND=noninteractive
-RUN apt-get update \
-  && apt-get install -y curl gnupg \
-  && echo "deb [arch=amd64] http://storage.googleapis.com/bazel-apt stable jdk1.8" | tee /etc/apt/sources.list.d/bazel.list \
-  && curl https://bazel.build/bazel-release.pub.gpg | apt-key add - \
+FROM gcr.io/mydata-1470162410749/zetasql-analyzer:latest
+COPY formatsql.cc formatsql.h main.go /zetasql/
+
+# Abseil
+RUN cd /tmp && git clone https://github.com/abseil/abseil-cpp.git abseil && cp -R abseil/absl /zetasql/
+
+RUN cd /tmp \
   && apt-get update \
-  && apt-get install -y \
-    bazel \
-    g++ \
-    git \
-    make \
-    openjdk-8-jdk-headless \
-    python \
-    python3-distutils \
-    tzdata \
-  && apt-get autoremove -y \
-  && apt-get clean -y \
-  && rm -rf /var/lib/apt/lists/*
-RUN git clone https://github.com/google/zetasql.git /zetasql \
-  && cd /zetasql \
-  # bazel was locked at 1.00
-  && rm -f .bazelversion \
-  && bazel build ...
+  && apt-get install wget \
+  && wget https://dl.google.com/go/go1.11.linux-amd64.tar.gz \
+  && tar -xvf go1.11.linux-amd64.tar.gz \
+  && mv go /usr/local \
+  && export GOROOT=/usr/local/go  \
+  && export GOPATH=$HOME/go \
+  && export PATH=$GOPATH/bin:$GOROOT/bin:$PATH \
+  && go version \
+  && which go \
+  && echo $GOPATH 
+
+RUN cd /zetasql \
+  && /usr/local/go/bin/go build main.go
+
+RUN cd /zetasql \
+  && /usr/local/go/bin/go run main.go
+# CMD cd /zetasql && bazel run //zetasql/experimental:execute_query -- "select 1 + 1;"
