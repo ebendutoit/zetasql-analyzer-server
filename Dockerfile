@@ -1,20 +1,24 @@
-FROM marketplace.gcr.io/google/bazel:0.26.1 AS build-env
-# use gcc because clang can't build m4
-RUN apt-get update && apt-get install --no-install-recommends -y make g++
-ENV CC /usr/bin/gcc
-WORKDIR /work
-COPY CROSSTOOL WORKSPACE BUILD formatsql.cc formatsql.h main.go /work/
-COPY bazel/* /work/bazel/
-RUN bazel build \
-  --incompatible_disable_deprecated_attr_params=false \
-  --incompatible_string_join_requires_strings=false \
-  --incompatible_new_actions_api=false \
-  --incompatible_require_ctx_in_configure_features=false \
-  --incompatible_depset_is_not_iterable=false \
-  --incompatible_no_support_tools_in_action_inputs=false \
-  --host_force_python=PY2 \
-  ...
-
-FROM gcr.io/distroless/cc
-COPY --from=build-env /work/bazel-bin/linux_amd64_stripped/zetasql-server ./
-ENTRYPOINT ["./zetasql-server"]
+FROM ubuntu:18.04
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update \
+  && apt-get install -y curl gnupg \
+  && echo "deb [arch=amd64] http://storage.googleapis.com/bazel-apt stable jdk1.8" | tee /etc/apt/sources.list.d/bazel.list \
+  && curl https://bazel.build/bazel-release.pub.gpg | apt-key add - \
+  && apt-get update \
+  && apt-get install -y \
+    bazel \
+    g++ \
+    git \
+    make \
+    openjdk-8-jdk-headless \
+    python \
+    python3-distutils \
+    tzdata \
+  && apt-get autoremove -y \
+  && apt-get clean -y \
+  && rm -rf /var/lib/apt/lists/*
+RUN git clone https://github.com/google/zetasql.git /zetasql \
+  && cd /zetasql \
+  # bazel was locked at 1.00
+  && rm -f .bazelversion \
+  && bazel build ...
