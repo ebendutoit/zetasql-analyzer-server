@@ -54,9 +54,11 @@ RUN cd /tmp \
   && cp -R src/google /work/ \
   && ls /work/google
 
+# zetaSQL
 RUN git clone https://github.com/google/zetasql.git /tmp/zetasql
 RUN cd /tmp/zetasql && cp -R * /work/
 RUN cd /work/ \
+  && rm .bazelversion \
   && bazel build ...
 
 # Abseil
@@ -66,7 +68,7 @@ RUN cd /tmp \
   && cd /work/abseil \
   && bazel build ...
 
-# Install GO
+# Golang
 RUN cd /tmp \
   && wget https://dl.google.com/go/go1.11.linux-amd64.tar.gz \
   && sudo tar -xvf go1.11.linux-amd64.tar.gz \
@@ -78,10 +80,4 @@ RUN cd /tmp \
   # && . ~/.profile \
   && go version \
   && which go \
-  && echo $GOPATH \
-  && cd /work \
-  && sudo /usr/local/go/bin/go build -o main .
-
-# FROM gcr.io/distroless/cc
-# COPY --from=build-env /work/bazel-bin/linux_amd64_stripped/zetasql-server ./
-ENTRYPOINT ["./main"]
+  && echo $GOPATH 
