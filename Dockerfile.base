@@ -54,7 +54,7 @@ RUN cd /tmp \
   && cp -R src/google /work/ \
   && ls /work/google
 
-RUN git clone https://github.com/google/zetasql.git /work/
+RUN git clone https://github.com/google/zetasql.git /tmp/zetasql && mv /tmp/zetasql /work/
 COPY CROSSTOOL parser.cc parser.h main.go /work/ 
 RUN cd /work/ \
   && rm .bazelversion \
