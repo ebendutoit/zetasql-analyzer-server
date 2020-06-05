@@ -57,7 +57,6 @@ RUN cd /tmp \
 RUN git clone https://github.com/google/zetasql.git /tmp/zetasql \
   && cp -R /tmp/zetasql /work/ \
   && cd /work/ \
-  && rm .bazelversion \
   && bazel build ...
 
 # Abseil
