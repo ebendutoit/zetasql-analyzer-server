@@ -61,7 +61,7 @@ RUN cd /work/ \
   && bazel build ...
 
 # Abseil
-RUN cd /tmp 
+RUN cd /tmp \
   && git clone https://github.com/abseil/abseil-cpp.git /work/abseil \
   && cp -R /work/abseil/absl /work/ \
   && cd /work/abseil \
