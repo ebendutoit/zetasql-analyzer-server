@@ -54,7 +54,7 @@ RUN cd /tmp \
   && cp -R src/google /work/ \
   && ls /work/google
 
-RUN git clone https://github.com/google/zetasql.git /tmp/zetasql \
+RUN git clone https://github.com/google/zetasql.git /tmp/zetasql
 RUN cp -R /tmp/zetasql .
 RUN cd /work/ \
   && bazel build ...
