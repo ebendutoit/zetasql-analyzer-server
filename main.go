@@ -3,7 +3,7 @@ package main
 /*
 #include <stdlib.h>
 #include "formatsql.h"
-#cgo LDFLAGS: -Wl,-unresolved-symbols=ignore-all
+#cgo LDFLAGS: -L${SRCDIR}/bazel-bin/zetasql/public -lsql_formatter -L${SRCDIR}/absl
 */
 import "C"
 
@@ -45,3 +45,8 @@ func main() {
 
     log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), nil))
 }
+
+
+// Add this to ignore linker errors
+// #cgo LDFLAGS: -Wl,-unresolved-symbols=ignore-all
+// #cgo LDFLAGS: -L${SRCDIR}/bazel-bin/zetasql/public -L${SRCDIR}/absl
