@@ -1,5 +1,4 @@
 FROM gcr.io/mydata-1470162410749/zetasql-analyzer-base:latest AS build-env
-#FROM marketplace.gcr.io/google/bazel:3.2.0 AS build-env
 
 RUN apt-get update \
     && apt-get install -y \
@@ -8,18 +7,21 @@ RUN apt-get update \
 
 RUN apt-get install --reinstall make
 
-WORKDIR /work
-RUN mkdir /app && mkdir /app/dependencies
-RUN cp -R /work/. /app/dependencies
-
+RUN mkdir /app
 WORKDIR /app
+#RUN mkdir /app && mkdir /app/dependencies
+#RUN cp -R /work/. /app/dependencies
+
+#WORKDIR /app
 COPY formatsql.cc formatsql.h main.go BUILD WORKSPACE CROSSTOOL .bazelrc /app/
 
 RUN cd /app \
-    && bazel build //:zetasql-analyzer-server
+    && bazel build ...
 
 FROM gcr.io/distroless/cc
-COPY --from=build-env /app/bazel-bin/linux_amd64_stripped/zetasql-server ./
+## Replace k8-fastbuild-ST-f6ff168d88b985c1411feb6f1fd6ce141962ad61a58c3dbc03d4d6b9b3c2d4a3 with your local build. 
+## You can analyse this with an interactive shell: docker run -it <image hash> bash
+COPY --from=build-env /app/bazel-out/k8-fastbuild-ST-f6ff168d88b985c1411feb6f1fd6ce141962ad61a58c3dbc03d4d6b9b3c2d4a3/bin/zetasql-analyzer-server_/zetasql-analyzer-server ./
 ENTRYPOINT ["./zetasql-analyzer-server"]
 
 # Run a golang server
