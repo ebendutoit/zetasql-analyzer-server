@@ -3,7 +3,6 @@ package main
 /*
 #include <stdlib.h>
 #include "formatsql.h"
-#cgo LDFLAGS: -L${SRCDIR}/bazel-bin/zetasql/public -lsql_formatter -L${SRCDIR}/absl
 */
 import "C"
 

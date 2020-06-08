@@ -1,19 +1,28 @@
 FROM gcr.io/mydata-1470162410749/zetasql-analyzer-base:latest AS build-env
-COPY formatsql.cc formatsql.h main.go /zetasql/
+#FROM marketplace.gcr.io/google/bazel:3.2.0 AS build-env
 
 RUN apt-get update \
     && apt-get install -y \
         nmap \
         vim
 
-RUN cd /zetasql \
-  && /usr/local/go/bin/go build -o zetasql-server .
+RUN apt-get install --reinstall make
+
+WORKDIR /work
+RUN mkdir /app && mkdir /app/dependencies
+RUN cp -R /work/. /app/dependencies
+
+WORKDIR /app
+COPY formatsql.cc formatsql.h main.go BUILD WORKSPACE CROSSTOOL .bazelrc /app/
+
+RUN cd /app \
+    && bazel build //:zetasql-analyzer-server
 
 FROM gcr.io/distroless/cc
-COPY --from=build-env /zetasql/zetasql-server ./
-ENTRYPOINT ["./zetasql-server"]
+COPY --from=build-env /app/bazel-bin/linux_amd64_stripped/zetasql-server ./
+ENTRYPOINT ["./zetasql-analyzer-server"]
 
-# Run the Go server
+# Run a golang server
 #####################################
 # RUN cd /zetasql \
 #   && /usr/local/go/bin/go run main.go

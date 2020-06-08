@@ -1,3 +1,4 @@
+# A dockerfile that compiles zetaSQL in on Ubuntu 18.04 and also compiles protobuf, abseil and golang
 FROM ubuntu:18.04 AS build-env
 
 # Avoid warnings by switching to noninteractive
