@@ -13,7 +13,7 @@ WORKDIR /app
 #RUN cp -R /work/. /app/dependencies
 
 #WORKDIR /app
-COPY formatsql.cc formatsql.h main.go BUILD WORKSPACE CROSSTOOL .bazelrc /app/
+COPY parse_query.cc parse_query.h main.go BUILD WORKSPACE CROSSTOOL .bazelrc /app/
 
 RUN cd /app \
     && bazel build ...

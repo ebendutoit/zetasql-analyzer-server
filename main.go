@@ -2,7 +2,7 @@ package main
 
 /*
 #include <stdlib.h>
-#include "formatsql.h"
+#include "parse_query.h"
 */
 import "C"
 
@@ -26,7 +26,11 @@ func handler(w http.ResponseWriter, r *http.Request) {
     cs := C.CString(string(b))
     defer C.free(unsafe.Pointer(cs))
 
-    formatResult := C.formatSqlC(cs)
+    // Select if you want to parse the statement or format it
+    // Uncomment the service you want to use
+    formatResult := C.parseStatement(cs)
+    //formatResult := C.C.formatSqlC(cs)
+
     defer C.free(unsafe.Pointer(formatResult))
 
     w.Write([]byte(C.GoString(formatResult)))
@@ -44,8 +48,3 @@ func main() {
 
     log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), nil))
 }
-
-
-// Add this to ignore linker errors
-// #cgo LDFLAGS: -Wl,-unresolved-symbols=ignore-all
-// #cgo LDFLAGS: -L${SRCDIR}/bazel-bin/zetasql/public -L${SRCDIR}/absl
