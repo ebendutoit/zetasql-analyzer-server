@@ -29,7 +29,7 @@ func handler(w http.ResponseWriter, r *http.Request) {
     // Select if you want to parse the statement or format it
     // Uncomment the service you want to use
     formatResult := C.parseStatement(cs)
-    //formatResult := C.C.formatSqlC(cs)
+    //formatResult := C.formatSqlC(cs)
 
     defer C.free(unsafe.Pointer(formatResult))
 
