@@ -39,46 +39,49 @@ RUN apt-get update \
     && apt-get autoremove -y \
     && apt-get clean -y 
 
-# Protobuf
-RUN cd /tmp \
-  # && git clone https://github.com/protocolbuffers/protobuf protobuf \
-  && wget https://github.com/protocolbuffers/protobuf/releases/download/v3.6.1/protobuf-all-3.6.1.tar.gz \
-  && sudo tar -xvf protobuf-all-3.6.1.tar.gz \
-  && cd /tmp/protobuf-3.6.1 \
-  && ls -la \
-  && sudo ./configure \
-  && sudo make \
-  && sudo make check \
-  && sudo make install \
-  && sudo ldconfig \
-  && mkdir /work/google \
-  && cp -R src/google /work/ \
-  && ls /work/google
+# Uncomment this section below if you are interested in also compiling a few things from sources: Protobuf, zetaSQL, Abseil and Golang
+# It isn't needed for the baseline setup, but purely for completeness.
 
-# zetaSQL
-RUN git clone https://github.com/google/zetasql.git /tmp/zetasql
-RUN cd /tmp/zetasql && cp -r * /work/ && cp .bazel* /work/
-RUN cd /work/ \
-  && rm .bazelversion \
-  && bazel build ...
+## Protobuf
+#RUN cd /tmp \
+#  # && git clone https://github.com/protocolbuffers/protobuf protobuf \
+#  && wget https://github.com/protocolbuffers/protobuf/releases/download/v3.6.1/protobuf-all-3.6.1.tar.gz \
+#  && sudo tar -xvf protobuf-all-3.6.1.tar.gz \
+#  && cd /tmp/protobuf-3.6.1 \
+#  && ls -la \
+#  && sudo ./configure \
+#  && sudo make \
+#  && sudo make check \
+#  && sudo make install \
+#  && sudo ldconfig \
+#  && mkdir /work/google \
+#  && cp -R src/google /work/ \
+#  && ls /work/google
 
-# Abseil
-RUN cd /tmp \
-  && git clone https://github.com/abseil/abseil-cpp.git /work/abseil \
-  && cp -R /work/abseil/absl /work/ \
-  && cd /work/abseil \
-  && bazel build ...
+## zetaSQL
+#RUN git clone https://github.com/google/zetasql.git /tmp/zetasql
+#RUN cd /tmp/zetasql && cp -r * /work/ && cp .bazel* /work/
+#RUN cd /work/ \
+#  && rm .bazelversion \
+#  && bazel build ...
 
-# Golang
-RUN cd /tmp \
-  && wget https://dl.google.com/go/go1.11.linux-amd64.tar.gz \
-  && sudo tar -xvf go1.11.linux-amd64.tar.gz \
-  && sudo mv go /usr/local \
-  && export GOROOT=/usr/local/go  \
-  && export GOPATH=$HOME/go \
-  && export PATH=$GOPATH/bin:$GOROOT/bin:$PATH \
-  && ls ~/ \
-  # && . ~/.profile \
-  && go version \
-  && which go \
-  && echo $GOPATH 
+## Abseil
+#RUN cd /tmp \
+#  && git clone https://github.com/abseil/abseil-cpp.git /work/abseil \
+#  && cp -R /work/abseil/absl /work/ \
+#  && cd /work/abseil \
+#  && bazel build ...
+
+## Golang
+#RUN cd /tmp \
+#  && wget https://dl.google.com/go/go1.11.linux-amd64.tar.gz \
+#  && sudo tar -xvf go1.11.linux-amd64.tar.gz \
+#  && sudo mv go /usr/local \
+#  && export GOROOT=/usr/local/go  \
+#  && export GOPATH=$HOME/go \
+#  && export PATH=$GOPATH/bin:$GOROOT/bin:$PATH \
+#  && ls ~/ \
+#  # && . ~/.profile \
+#  && go version \
+#  && which go \
+#  && echo $GOPATH 
