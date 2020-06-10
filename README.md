@@ -4,7 +4,7 @@ zetaSQL is a parser used by Google to parse queries for Google BigQuery and Clou
 
 # What is this repo about?
 
-The base repository is here: This repository solves a few needs:
+This repository solves a few needs:
 - A dockerfile based on Ubuntu 18.04 that serves as base to use the latest version of zetaSQL
 - A dockerfile to build a service that offers the syntax checking functionality of zetaSQL
 
