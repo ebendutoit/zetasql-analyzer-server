@@ -1,4 +1,4 @@
-FROM gcr.io/mydata-1470162410749/zetasql-analyzer-base:latest AS build-env
+FROM docker.io/eebsidian/zetasql-base:latest AS build-env
 
 RUN apt-get update \
     && apt-get install -y \
