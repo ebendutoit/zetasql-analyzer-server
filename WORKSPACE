@@ -19,11 +19,11 @@ load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 
 http_archive(
    name = "com_google_zetasql",
-   strip_prefix = "zetasql-2020.04.1",
+   strip_prefix = "zetasql-2020.09.01",
    urls = [
-      "https://github.com/google/zetasql/archive/2020.04.1.tar.gz",
+      "https://github.com/google/zetasql/archive/2020.09.01.tar.gz",
    ],
-   sha256 = "b1eab290101a3e4899a30f459579c590b0168bdd82fceede8bde1214eb01843d"
+   sha256 = "bec2e18c6e3857e180ea5fa7524938553d42e2ca27706697bc801a0ca7977606"
 )
 
 load("@com_google_zetasql//bazel:zetasql_deps_step_1.bzl", "zetasql_deps_step_1")
